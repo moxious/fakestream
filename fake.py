@@ -6,12 +6,13 @@ from product.purchase import Purchase
 from finance.accounttransfer import AccountTransfer
 from finance.account import Account
 from finance.bank import Bank
-
+from streamentry import TemplateStreamEntry
 from terminationcondition import TimedRun, CountRun
 
 import sys
 import argparse
 import time
+import json
 
 from kafka import kafka_send, kafka_flush
 
@@ -22,29 +23,40 @@ types = {
     "account": Account,
     "accounttransfer": AccountTransfer,
     "purchase": Purchase,
-    "profile": Profile
+    "profile": Profile,
+    "customer": Profile
 }
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--type", help="type of object to generate", type=str)
+    parser.add_argument("--type", help="type of object to generate", default=None, type=str)
     parser.add_argument("--stream", help="stream to produce messages on", type=str)
     parser.add_argument("-n", help="How many to generate", default=None, type=int)
     parser.add_argument("--ms", help="Generate records for this many milliseconds", default=None, type=int)
     parser.add_argument("--topic", help="Kafka topic to send to", default=None)
+    parser.add_argument("--mps", help="Messages per second to send", default=1, type=float)
     parser.add_argument("--dryrun", help="If set, kafka messages won't be sent", action='store_true')
+    parser.add_argument("--template", help="Template JSON file", default=None, type=str)
     return parser
 
 def usage(parser):
     parser.print_help()
     sys.exit(1)
 
-def generate(constructor, topic, termination_condition, dry_run=False):
+def generate(constructor, termination_condition, args):
     count = 0
+
+    topic = args.topic
+    dry_run = args.dryrun
+
+    if not topic: 
+        raise Exception("Must provide topic")
+    
+    sleep_time_sec = 1 / args.mps
 
     while True:
         count = count + 1
-        thing = constructor.create()
+        thing = constructor()
         print(thing)
 
         if not dry_run:
@@ -53,6 +65,8 @@ def generate(constructor, topic, termination_condition, dry_run=False):
         termination_condition.ran(thing)
         if termination_condition.finished(): 
             break
+        
+        time.sleep(sleep_time_sec)
 
     if not dry_run:
         print("Flushing kafka...")
@@ -61,24 +75,37 @@ def generate(constructor, topic, termination_condition, dry_run=False):
     print("Dry-run %s" % dry_run)
     return count
 
+def create_constructor_from_template(template_file):
+    with open(template_file) as json_file: 
+        data = json.load(json_file)
+    
+    return lambda: TemplateStreamEntry.create(data)
+
+def get_constructor(args, parser):
+    if not args.type and not args.template:
+        print("You must specify either --type or --template")
+        usage(parser)
+
+    if args.type:
+        try:
+            object_type = types[args.type.lower().strip()]
+            return lambda: object_type.create()
+        except KeyError:
+            print("Unrecognized type %s" % args.type)
+            print("Options are:\n   %s" % "\n   ".join(types.keys()))
+            usage(parser)
+    
+    return create_constructor_from_template(args.template)
 
 def main():
     parser = create_parser()
     args = parser.parse_args()
 
-    if not args.type:
-        usage(parser)
+    constructor = get_constructor(args, parser)
 
     if not args.n and not args.ms:
         # Default is to just produce 1.
         args.n = 1
-
-    try:
-        constructor = types[args.type.lower().strip()]
-    except KeyError:
-        print("Unrecognized type %s" % args.type)
-        print("Options are:\n   %s" % "\n   ".join(types.keys()))
-        usage(parser)
 
     tc = None
 
@@ -93,7 +120,7 @@ def main():
     if not args.topic:
         args.topic = args.type.lower().strip()
 
-    generate(constructor, args.topic, tc, args.dryrun)
+    generate(constructor, tc, args)
 
 if __name__== "__main__":
   main()
