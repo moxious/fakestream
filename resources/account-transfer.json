@@ -1,0 +1,9 @@
+{
+    "id": "transfer_id",
+    "type": "accounttransfer",
+    "from_id": "account_id",
+    "to_id": "account_id",
+    "amount": "currency_amount",
+    "currency": "common_currency",
+    "date": "now"
+}

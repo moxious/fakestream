@@ -1,0 +1,8 @@
+{
+    "id": "account_id",
+    "type": "account",
+    "iban": "iban",
+    "bank_id": "bank_id",
+    "account_holder": "customer_id",
+    "currency": "common_currency"
+}

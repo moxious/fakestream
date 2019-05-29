@@ -1,0 +1,9 @@
+{
+    "id": "purchase_id",
+    "type": "purchase",
+    "customer_id": "customer_id",
+    "product_id": "product_id",
+    "company_id": "company_id",
+    "date": "now",
+    "quantity": "quantity"
+}

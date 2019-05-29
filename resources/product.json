@@ -1,0 +1,9 @@
+{
+    "id": "product_id",
+    "type": "product",
+    "name": "product_name",
+    "version": "1",
+    "color": "color_name",
+    "url": "url",
+    "product_code": "ean8"
+}

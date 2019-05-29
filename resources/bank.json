@@ -1,0 +1,8 @@
+{
+    "id": "bank_id",
+    "type": "bank",
+    "name": "company",
+    "suffix": "company_suffix",
+    "tagline": "bs",
+    "country": "country"
+}
