@@ -21,7 +21,9 @@
 #   NEO4J_streams_source_enable: "false"
 
 # 5 minutes
-TIME_MS=300000
+# TIME_MS=300000
+# 10 seconds
+TIME_MS=10000
 
 # CUSTOMERS
 pipenv run python3 fake.py \
@@ -40,7 +42,7 @@ pipenv run python3 fake.py \
     --topic product \
     --mps 5 \
     --type product \
-    --ms $TIME_MS >products.log 2>& &
+    --ms $TIME_MS >products.log 2>&1 &
 # PURCHASES
 pipenv run python3 fake.py \
     --topic purchase \
