@@ -20,10 +20,10 @@ class Purchase(StreamEntry):
 
     @staticmethod
     def create():
-        id = random.randint(1, Domain.PURCHASES)
-        customer_id = random.randint(1, Domain.CUSTOMERS)
-        product_id = random.randint(1, Domain.PRODUCTS)
-        company_id = random.randint(1, Domain.COMPANIES)
+        id = Domain.id(Domain.PURCHASES)
+        customer_id = Domain.id(Domain.CUSTOMERS)
+        product_id = Domain.id(Domain.PRODUCTS)
+        company_id = Domain.id(Domain.COMPANIES)
         date = datetime.datetime.now().isoformat()
         quantity = random.randint(1, 10)
 

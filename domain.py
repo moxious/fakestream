@@ -1,6 +1,9 @@
 import json
+import numpy
+import math
 
 class Domain:
+    A = 5.
     DEFAULT = 1000
     BANKS = 1000
     PRODUCTS = 1000
@@ -9,6 +12,11 @@ class Domain:
     ACCOUNTS = 1000
     TRANSFERS = 1000
     PURCHASES = 1000000
+
+    """Generates a power law distribution of IDs in a given range"""
+    @staticmethod
+    def id(range=DEFAULT):
+        return math.floor(numpy.random.power(Domain.A) * range)
 
     def __init__(self, f="domain.json"):
         if not f:

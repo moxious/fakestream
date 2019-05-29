@@ -18,7 +18,7 @@ class Company(StreamEntry):
     @staticmethod
     def create():
         return Company(
-            random.randint(1, Domain.COMPANIES),
+            Domain.id(Domain.COMPANIES),
             fake.company(),
             fake.company_suffix(),
             fake.catch_phrase() + ' / ' + fake.bs(),

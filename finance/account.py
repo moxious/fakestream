@@ -20,7 +20,7 @@ class Account(StreamEntry):
     def create():
         id = fake.iban()
         iban = id
-        bank_id = random.randint(1, Domain.BANKS)
-        account_holder = random.randint(1, Domain.CUSTOMERS)
+        bank_id = Domain.id(Domain.BANKS)
+        account_holder = Domain.id(Domain.CUSTOMERS)
 
         return Account(id, iban, bank_id, account_holder)

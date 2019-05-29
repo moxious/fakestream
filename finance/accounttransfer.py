@@ -22,7 +22,7 @@ class AccountTransfer(StreamEntry):
 
     @staticmethod
     def create():
-        id = random.randint(1, Domain.TRANSFERS)
+        id = Domain.id(Domain.TRANSFERS)
         from_iban = fake.iban()
         to_iban = fake.iban()
         amount = random.randint(1, 10000000)

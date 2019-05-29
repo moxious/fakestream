@@ -28,7 +28,7 @@ class TemplateStreamEntry(StreamEntry):
         tsl = TemplateStreamEntry(template)
         def make_entry(key):
             if key == 'id':
-                val = random.randint(1, Domain.DEFAULT)
+                val = Domain.id()
             else:
                 try:
                     fake_function = fake.__dict__[template[key]]
