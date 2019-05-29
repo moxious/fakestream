@@ -1,0 +1,11 @@
+{
+    "op": "create",
+    "type": "relationship",
+    "from": 123,
+    "to": 456,
+    "rel_type": "BUYS",
+    "properties": {
+        "foo": "bar",
+        "baz": 2
+    }
+}

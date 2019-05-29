@@ -1,0 +1,8 @@
+{
+    "op": "update",
+    "id": 123,
+    "properties": {
+        "foo": "bar",
+        "baz": 2
+    }
+}

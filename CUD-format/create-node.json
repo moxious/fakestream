@@ -1,0 +1,9 @@
+{
+    "op": "create",
+    "type": "node",
+    "labels": ["Foo", "Bar"],
+    "properties": {
+        "foo": "bar",
+        "baz": 2
+    }
+}

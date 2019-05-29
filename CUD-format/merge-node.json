@@ -1,0 +1,12 @@
+{
+    "op": "merge",
+    "type": "node",
+    "on": {
+        "my_id": 123
+    },
+    "labels": ["Foo", "Bar"],
+    "properties": {
+        "foo": "bar",
+        "baz": 2
+    }
+}

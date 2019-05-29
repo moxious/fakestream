@@ -1,0 +1,5 @@
+{
+    "op": "delete",
+    "id": 123,
+    "detach": true
+}
