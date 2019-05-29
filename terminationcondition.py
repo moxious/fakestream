@@ -9,14 +9,13 @@ class TerminationCondition:
         self.times = self.times + 1
     def finished(self): return False
     def get_count(self): return self.times
+    def elapsed(self):
+        return int(round(time.time() * 1000)) - self.start_time
 
 class TimedRun(TerminationCondition):
     def __init__(self, ms):
         TerminationCondition.__init__(self)
         self.end_time = self.start_time + ms
-
-    def elapsed(self):
-        return int(round(time.time() * 1000)) - self.start_time
 
     def finished(self):
         return int(round(time.time() * 1000)) >= self.end_time

@@ -3,7 +3,7 @@ import random
 import json
 from streamentry import StreamEntry
 from domain import Domain
-fake = Faker()
+fake = Domain.faker()
 
 class Product(StreamEntry):
     def __init__(self, id,

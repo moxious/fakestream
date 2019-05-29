@@ -5,7 +5,7 @@ from streamentry import StreamEntry
 import datetime
 from domain import Domain
 
-fake = Faker()
+fake = Domain.faker()
 
 class Account(StreamEntry):
     def __init__(self, id, iban, bank_id, account_holder):

@@ -4,7 +4,7 @@ import json
 from streamentry import StreamEntry
 from domain import Domain 
 
-fake = Faker()
+fake = Domain.faker()
 
 class Profile(StreamEntry):
     def __init__(self, id, first_name, last_name, gender, street, postal_code, 

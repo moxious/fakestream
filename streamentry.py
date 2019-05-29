@@ -24,7 +24,7 @@ class TemplateStreamEntry(StreamEntry):
 
     @staticmethod
     def create(template):
-        fake = Faker()
+        fake = Domain.faker()
         tsl = TemplateStreamEntry(template)
         def make_entry(key):
             if key == 'id':

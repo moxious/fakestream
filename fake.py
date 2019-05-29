@@ -59,7 +59,7 @@ def generate(constructor, termination_condition, args):
     while True:
         count = count + 1
         thing = constructor()
-        # print(thing)
+        print(thing)
 
         if not dry_run:
             kafka_send(topic, thing)

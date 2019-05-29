@@ -6,7 +6,7 @@ import datetime
 from domain import Domain
 from uuid import uuid4
 
-fake = Faker()
+fake = Domain.faker()
 
 currencies = ['USD', 'USD', 'USD', 'USD', 'EUR', 'EUR', 'EUR', 'GBP', 'GBP', 'CHF', 'AUD', 'CNY', 'RUB']
 

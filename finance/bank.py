@@ -3,8 +3,9 @@ import random
 import json
 from product.company import Company
 import datetime
+from domain import Domain
 
-fake = Faker()
+fake = Domain.faker()
 
 class Bank(Company):
     def __init__(self, id, name, suffix, tagline, country):

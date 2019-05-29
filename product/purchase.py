@@ -5,7 +5,7 @@ from streamentry import StreamEntry
 import datetime
 from domain import Domain
 
-fake = Faker()
+fake = Domain.faker()
 
 class Purchase(StreamEntry):
     def __init__(self, id, customer_id, product_id, company_id, date, quantity):
