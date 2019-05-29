@@ -33,7 +33,8 @@ class TemplateStreamEntry(StreamEntry):
                 try:
                     fake_function = fake.__dict__[template[key]]
                 except KeyError:
-                    raise Exception("Template refers to %s: %s which is not a valid fake function" % (key, template[key]))
+                    fake_function = lambda: template[key]
+                    # raise Exception("Template refers to %s: %s which is not a valid fake function" % (key, template[key]))
                 val = fake_function()
             tsl[key] = val
 
