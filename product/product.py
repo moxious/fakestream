@@ -2,11 +2,11 @@ from faker import Faker
 import random
 import json
 from streamentry import StreamEntry
-
+from domain import Domain
 fake = Faker()
 
 class Product(StreamEntry):
-    def __init__(self, id=random.randint(1, 1000000),
+    def __init__(self, id=random.randint(1, Domain.PRODUCTS),
         name=' '.join(list(map(lambda e: e.capitalize(), fake.words(nb=2, ext_word_list=None, unique=False)))),
         version=1, 
         color=fake.color_name(), 
@@ -22,7 +22,7 @@ class Product(StreamEntry):
 
     @staticmethod
     def create():
-        id = random.randint(1, 1000000)
+        id = random.randint(1, Domain.PRODUCTS)
         name = ' '.join(list(map(lambda e: e.capitalize(), fake.words(nb=2, ext_word_list=None, unique=False))))
         version = 1
         color = fake.color_name()

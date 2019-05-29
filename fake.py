@@ -8,6 +8,7 @@ from finance.account import Account
 from finance.bank import Bank
 from streamentry import TemplateStreamEntry
 from terminationcondition import TimedRun, CountRun
+from domain import Domain
 
 import sys
 import argparse
@@ -37,6 +38,7 @@ def create_parser():
     parser.add_argument("--mps", help="Messages per second to send", default=1, type=float)
     parser.add_argument("--dryrun", help="If set, kafka messages won't be sent", action='store_true')
     parser.add_argument("--template", help="Template JSON file", default=None, type=str)
+    parser.add_argument("--domain", help="Domain JSON file", default="domain.json")
     return parser
 
 def usage(parser):
@@ -57,7 +59,7 @@ def generate(constructor, termination_condition, args):
     while True:
         count = count + 1
         thing = constructor()
-        print(thing)
+        # print(thing)
 
         if not dry_run:
             kafka_send(topic, thing)
@@ -120,6 +122,8 @@ def main():
     if not args.topic:
         args.topic = args.type.lower().strip()
 
+    domain = Domain(args.domain)
+    print(domain)
     generate(constructor, tc, args)
 
 if __name__== "__main__":

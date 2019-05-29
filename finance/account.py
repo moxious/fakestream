@@ -3,6 +3,7 @@ import random
 import json
 from streamentry import StreamEntry
 import datetime
+from domain import Domain
 
 fake = Faker()
 
@@ -19,7 +20,7 @@ class Account(StreamEntry):
     def create():
         id = fake.iban()
         iban = id
-        bank_id = random.randint(1, 1000000)
-        account_holder = random.randint(1, 1000000)
+        bank_id = random.randint(1, Domain.BANKS)
+        account_holder = random.randint(1, Domain.CUSTOMERS)
 
         return Account(id, iban, bank_id, account_holder)

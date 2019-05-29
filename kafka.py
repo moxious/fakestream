@@ -3,6 +3,8 @@ import uuid
 import os
 import json
 
+debug = False
+
 # Docs:
 # https://docs.confluent.io/current/clients/confluent-kafka-python/
 
@@ -28,6 +30,8 @@ try:
 except KeyError:
     raise Exception("You must define env vars KAFKA_BOOTSTRAP_SERVERS, CONFLUENT_API_KEY, and CONFLUENT_API_SECRET")
 
+local = False
+
 config = {
     'bootstrap.servers': bootstrap,
     'broker.version.fallback': '0.10.0.0',
@@ -38,7 +42,7 @@ config = {
     'sasl.password': password
 }
 
-# print("Kafka config: %s" % json.dumps(config, indent=3))
+print("Kafka config: %s" % json.dumps(config, indent=3))
 
 p = Producer(config)
 
@@ -46,7 +50,6 @@ def kafka_flush():
     return p.flush()
 
 def kafka_send(topic, entry, callback=acked):
-    print("SEND TO: %s" % topic)
     if not topic or not entry:
         raise Exception('Topic and entry must be good')
 

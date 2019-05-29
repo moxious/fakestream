@@ -2,6 +2,7 @@ from faker import Faker
 import random
 import json
 from streamentry import StreamEntry
+from domain import Domain 
 
 fake = Faker()
 
@@ -29,7 +30,7 @@ class Profile(StreamEntry):
         first_name = fake.first_name_male() if gender == "M" else fake.first_name_female()
         last_name = fake.last_name()
         state = fake.state_abbr()
-        return Profile(random.randint(1, 1000000),
+        return Profile(random.randint(1, Domain.CUSTOMERS),
             first_name, last_name, gender,
             fake.street_address(),
             fake.zipcode_in_state(state))

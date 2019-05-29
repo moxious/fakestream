@@ -2,6 +2,7 @@ from faker import Faker
 import random
 import json
 from streamentry import StreamEntry
+from domain import Domain 
 
 fake = Faker()
 
@@ -17,7 +18,7 @@ class Company(StreamEntry):
     @staticmethod
     def create():
         return Company(
-            random.randint(1, 1000000),
+            random.randint(1, Domain.COMPANIES),
             fake.company(),
             fake.company_suffix(),
             fake.catch_phrase() + ' / ' + fake.bs(),

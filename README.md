@@ -29,7 +29,7 @@ pipenv run python3 fake.py \
     --mps 1
 ```
 
-## Tempalted Fakers
+## Templated Fakers
 
 Rather than specifying a supported `--type`, you can define your own, with a small JSON file, like this:
 
@@ -44,3 +44,5 @@ Rather than specifying a supported `--type`, you can define your own, with a sma
 The keys refer to the keys for objects you will generate.  The values are the names
 of faker functions, so `color_name` will use the python module's `faker.color_name()` function.  In this way, new types of fakes can be developed and shared as simple
 JSON files.
+
+[Reference of available faker providers](https://faker.readthedocs.io/en/stable/providers.html)

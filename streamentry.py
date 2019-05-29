@@ -1,6 +1,7 @@
 import json
 from faker import Faker
 import random
+from domain import Domain 
 
 class StreamEntry:
     def __init__(self):
@@ -27,7 +28,7 @@ class TemplateStreamEntry(StreamEntry):
         tsl = TemplateStreamEntry(template)
         def make_entry(key):
             if key == 'id':
-                val = random.randint(1, 1000000)
+                val = random.randint(1, Domain.DEFAULT)
             else:
                 try:
                     fake_function = fake.__dict__[template[key]]

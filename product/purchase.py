@@ -3,6 +3,7 @@ import random
 import json
 from streamentry import StreamEntry
 import datetime
+from domain import Domain
 
 fake = Faker()
 
@@ -19,10 +20,10 @@ class Purchase(StreamEntry):
 
     @staticmethod
     def create():
-        id = random.randint(1, 1000000)
-        customer_id = random.randint(1, 1000000)
-        product_id = random.randint(1, 1000000)
-        company_id = random.randint(1, 1000000)
+        id = random.randint(1, Domain.PURCHASES)
+        customer_id = random.randint(1, Domain.CUSTOMERS)
+        product_id = random.randint(1, Domain.PRODUCTS)
+        company_id = random.randint(1, Domain.COMPANIES)
         date = datetime.datetime.now().isoformat()
         quantity = random.randint(1, 10)
 
