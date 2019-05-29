@@ -74,7 +74,6 @@ def generate(constructor, termination_condition, args):
         print("Flushing kafka...")
         kafka_flush()
     
-    print("Dry-run %s" % dry_run)
     return count
 
 def create_constructor_from_template(template_file):
@@ -110,6 +109,11 @@ def stats(tc):
     print("   %f milliseconds/message, or" % ms_per_msg)
     print("   %f messages/sec actual" % msg_per_sec)
 
+def finish_and_exit(tc, message="All Done", exit_code=0):
+    print(message)
+    stats(tc)
+    sys.exit(exit_code)
+
 def main():
     parser = create_parser()
     args = parser.parse_args()
@@ -134,13 +138,12 @@ def main():
         args.topic = args.type.lower().strip()
 
     domain = Domain(args.domain)
-    print(domain)
     try:
         generate(constructor, tc, args)
     except KeyboardInterrupt:
-        print("\n\nInterrupted.  Exiting");
-        stats(tc)
-        sys.exit(0)
+        finish_and_exit(tc, "\n\nInterrupted.  Exiting", 1)
+
+    finish_and_exit(tc)
 
 if __name__== "__main__":
   main()
