@@ -9,6 +9,7 @@ autopep8 = "*"
 [packages]
 faker = "*"
 confluent-kafka = {extras = ["avro"],version = "*"}
+numpy = "*"
 
 [requires]
 python_version = "3.7"
