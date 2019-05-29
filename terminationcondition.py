@@ -2,17 +2,21 @@
 import time
 
 class TerminationCondition:
-    def __init__(self): pass
-    def ran(self, payload): pass
+    def __init__(self):
+        self.start_time = int(round(time.time() * 1000))
+        self.times = 0
+    def ran(self, payload):
+        self.times = self.times + 1
     def finished(self): return False
+    def get_count(self): return self.times
 
 class TimedRun(TerminationCondition):
     def __init__(self, ms):
         TerminationCondition.__init__(self)
-        self.start_time = int(round(time.time() * 1000))
         self.end_time = self.start_time + ms
-    
-    def ran(self, payload): pass
+
+    def elapsed(self):
+        return int(round(time.time() * 1000)) - self.start_time
 
     def finished(self):
         return int(round(time.time() * 1000)) >= self.end_time
@@ -22,9 +26,6 @@ class CountRun(TerminationCondition):
         TerminationCondition.__init__(self)
         self.limit = n
         self.times = 0
-    
-    def ran(self, payload):
-        self.times = self.times + 1
     
     def finished(self):
         return self.times >= self.limit

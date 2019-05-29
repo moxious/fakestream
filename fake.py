@@ -99,6 +99,17 @@ def get_constructor(args, parser):
     
     return create_constructor_from_template(args.template)
 
+def stats(tc):
+    elapsed = tc.elapsed()
+    count = tc.get_count()
+    ms_per_msg = elapsed / count
+    msg_per_sec = count / (elapsed / 1000)
+    print("Production stats:")
+    print("   %d messages in" % count)
+    print("   %d millseconds" % elapsed)
+    print("   %f milliseconds/message, or" % ms_per_msg)
+    print("   %f messages/sec actual" % msg_per_sec)
+
 def main():
     parser = create_parser()
     args = parser.parse_args()
@@ -124,7 +135,12 @@ def main():
 
     domain = Domain(args.domain)
     print(domain)
-    generate(constructor, tc, args)
+    try:
+        generate(constructor, tc, args)
+    except KeyboardInterrupt:
+        print("\n\nInterrupted.  Exiting");
+        stats(tc)
+        sys.exit(0)
 
 if __name__== "__main__":
   main()
