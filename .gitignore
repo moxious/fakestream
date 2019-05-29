@@ -1,2 +1,3 @@
 docker-compose.yml
 install-streams.sh
+*.log
