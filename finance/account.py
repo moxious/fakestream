@@ -18,8 +18,8 @@ class Account(StreamEntry):
 
     @staticmethod
     def create():
-        id = fake.iban()
-        iban = id
+        id = Domain.id(Domain.ACCOUNTS)
+        iban = fake.iban()
         bank_id = Domain.id(Domain.BANKS)
         account_holder = Domain.id(Domain.CUSTOMERS)
 
