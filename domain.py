@@ -62,5 +62,6 @@ class FakeStreamProvider(BaseProvider):
     def common_currency(self): return random.choice(Domain.currencies)
     def currency_amount(self): return random.randint(1, 10000000)
     def now(self): return datetime.datetime.now().isoformat()
+    def recent_date(self): return FakeStreamProvider.fake.date_this_year(before_today=True)
     def product_name(self): return ' '.join(list(map(lambda e: e.capitalize(), FakeStreamProvider.fake.words(nb=2, ext_word_list=None, unique=False))))
     def quantity(self): return random.randint(1, 10)
