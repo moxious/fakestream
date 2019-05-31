@@ -11,12 +11,12 @@ from faker.providers import BaseProvider
 class Domain:
     A = 5.
     DEFAULT = 1000
-    BANKS = 1000
+    BANKS = 200
     PRODUCTS = 1000
     CUSTOMERS = 1000
     COMPANIES = 1000
-    ACCOUNTS = 1000
-    TRANSFERS = 1000
+    ACCOUNTS = 3000
+    TRANSFERS = 1000000
     PURCHASES = 1000000
     currencies = ['USD', 'USD', 'USD', 'USD', 'EUR', 'EUR', 'EUR', 'GBP', 'GBP', 'CHF', 'AUD', 'CNY', 'RUB']
 

@@ -3,7 +3,7 @@
     "type": "account",
     "iban": "iban",
     "bank": {
-        "bank_id": "bank_id",
+        "id": "bank_id",
         "type": "bank",
         "name": "company",
         "suffix": "company_suffix",
@@ -13,7 +13,7 @@
         "zip": "zipcode"    
     },
     "account_holder": {
-        "account_holder": "customer_id",
+        "id": "customer_id",
         "gender": "M",
         "first_name": "first_name_male",
         "last_name": "last_name",
