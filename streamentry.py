@@ -26,19 +26,28 @@ class TemplateStreamEntry(StreamEntry):
     def create(template):
         fake = Domain.faker()
         tsl = TemplateStreamEntry(template)
-        def make_entry(key):
-            if key == 'id':
-                val = Domain.id()
-            else:
-                try:
-                    fake_function = fake.__dict__[template[key]]
-                except KeyError:
-                    fake_function = lambda: template[key]
-                    # raise Exception("Template refers to %s: %s which is not a valid fake function" % (key, template[key]))
-                val = fake_function()
-            tsl[key] = val
 
-        for key in template.keys():
-            make_entry(key)
+        def fake_a_value(tmpl_val):
+            try:
+                fake_function = fake.__dict__[tmpl_val]
+            except KeyError:
+                fake_function = lambda: tmpl_val
+            return fake_function()
 
-        return tsl
+        def substitute_template_entries(tmpl, place_into):
+            for key in tmpl.keys():
+                tmpl_val = tmpl[key]
+                if key == 'id':
+                    val = Domain.id()
+                else:
+                    if type(tmpl_val) == dict:
+                        # Descend and recurse
+                        val = {}                        
+                        substitute_template_entries(tmpl_val, val)
+                    else:
+                        val = fake_a_value(tmpl_val)
+                # Whatever value the above logic assigned, stick it in.
+                place_into[key] = val
+            return place_into
+
+        return substitute_template_entries(template, tsl)
