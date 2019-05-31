@@ -4,5 +4,7 @@
     "name": "company",
     "suffix": "company_suffix",
     "tagline": "bs",
-    "country": "country"
+    "address": "street_address",
+    "state": "state_abbr",
+    "zip": "zipcode"
 }

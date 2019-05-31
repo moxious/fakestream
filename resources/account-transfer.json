@@ -5,5 +5,5 @@
     "to_id": "account_id",
     "amount": "currency_amount",
     "currency": "common_currency",
-    "date": "now"
+    "date": "recent_date"
 }

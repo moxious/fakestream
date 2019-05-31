@@ -2,7 +2,25 @@
     "id": "account_id",
     "type": "account",
     "iban": "iban",
-    "bank_id": "bank_id",
-    "account_holder": "customer_id",
+    "bank": {
+        "bank_id": "bank_id",
+        "type": "bank",
+        "name": "company",
+        "suffix": "company_suffix",
+        "tagline": "bs",
+        "address": "street_address",
+        "state": "state_abbr",
+        "zip": "zipcode"    
+    },
+    "account_holder": {
+        "account_holder": "customer_id",
+        "gender": "M",
+        "first_name": "first_name_male",
+        "last_name": "last_name",
+        "state": "state_abbr",
+        "address": "street_address",
+        "zip": "zipcode",
+        "occupation": "job"
+    },
     "currency": "common_currency"
 }
