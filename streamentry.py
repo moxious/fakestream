@@ -37,15 +37,12 @@ class TemplateStreamEntry(StreamEntry):
         def substitute_template_entries(tmpl, place_into):
             for key in tmpl.keys():
                 tmpl_val = tmpl[key]
-                if key == 'id':
-                    val = Domain.id()
+                if type(tmpl_val) == dict:
+                    # Descend and recurse
+                    val = {}                        
+                    substitute_template_entries(tmpl_val, val)
                 else:
-                    if type(tmpl_val) == dict:
-                        # Descend and recurse
-                        val = {}                        
-                        substitute_template_entries(tmpl_val, val)
-                    else:
-                        val = fake_a_value(tmpl_val)
+                    val = fake_a_value(tmpl_val)
                 # Whatever value the above logic assigned, stick it in.
                 place_into[key] = val
             return place_into
