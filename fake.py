@@ -135,7 +135,7 @@ def main():
         usage(parser)
 
     if not args.topic:
-        args.topic = args.type.lower().strip()
+        args.topic = (args.type or args.template).lower().strip()
 
     domain = Domain(args.domain)
     try:
