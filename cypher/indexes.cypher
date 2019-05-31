@@ -5,3 +5,9 @@ CREATE CONSTRAINT ON (x:Profile) ASSERT x.id  IS UNIQUE;
 CREATE CONSTRAINT ON (x:Company) ASSERT x.id  IS UNIQUE;
 CREATE CONSTRAINT ON (x:Purchase) ASSERT x.id  IS UNIQUE;
 CREATE CONSTRAINT ON (x:AccountTransfer) ASSERT x.id IS UNIQUE;
+
+CREATE INDEX ON :Province(name);
+CREATE INDEX ON :City(name);
+CREATE INDEX ON :Country(name);
+CREATE INDEX ON :Country(iso2);
+CREATE INDEX ON :Country(iso3);
