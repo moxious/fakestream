@@ -5,6 +5,7 @@ TIME_MS=300000
 # 10 seconds
 # TIME_MS=10000
 
+# Generate account details; accounts, customers, banks FIRST.
 echo "Generating account details, accounts, customers, banks."
 pipenv run python3 fake.py \
     --template resources/account-details.json \
