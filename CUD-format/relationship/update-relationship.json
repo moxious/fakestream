@@ -1,5 +1,6 @@
 {
     "op": "update",
+    "type": "relationship",
     "id": 123,
     "properties": {
         "foo": "bar",

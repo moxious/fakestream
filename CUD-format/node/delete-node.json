@@ -1,5 +1,6 @@
 {
     "op": "delete",
+    "type": "node",
     "id": 123,
     "detach": true
 }
