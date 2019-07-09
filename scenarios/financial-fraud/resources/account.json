@@ -1,0 +1,16 @@
+{
+    "id": "account_id",
+    "type": "account",
+    "iban": "iban",
+    "account_holder": {
+        "id": "customer_id",
+        "gender": "M",
+        "first_name": "first_name_male",
+        "last_name": "last_name",
+        "state": "state_abbr",
+        "address": "street_address",
+        "zip": "zipcode",
+        "occupation": "job"
+    },
+    "currency": "common_currency"
+}

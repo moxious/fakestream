@@ -1,0 +1,12 @@
+{
+    "id": "customer_id",
+    "first_name": "first_name_male",
+    "last_name": "last_name",
+    "state": "state_abbr",
+    "city": "city",
+    "ssn": "ssn",
+    "address": "street_address",
+    "zip": "zipcode",
+    "phone": "phone",
+    "occupation": "job"
+}

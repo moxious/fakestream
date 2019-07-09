@@ -1,0 +1,5 @@
+{
+    "party_id": "customer_id",
+    "cookie_id": "uuid",
+    "cookie": "sha256"
+}
