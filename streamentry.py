@@ -7,12 +7,17 @@ class StreamEntry:
     def __init__(self):
         pass
     
-    def __str__(self):
+    def keys(self):
+        return list(filter(lambda i: not i.startswith('_'), self.__dict__.keys()))
+
+    def as_dict(self):
         # Don't include keys starting with _ this lets us store object data
         # without it ending up polluting the final hash.
         d = self.__dict__
-        final_dict = {i:d[i] for i in d if not i.startswith('_')}
-        return json.dumps(final_dict, indent=3)
+        return {i:d[i] for i in d if not i.startswith('_')}
+
+    def __str__(self):
+        return json.dumps(self.as_dict())
 
 class TemplateStreamEntry(StreamEntry):
     def __init__(self, template):

@@ -9,6 +9,7 @@ from finance.bank import Bank
 from streamentry import TemplateStreamEntry
 from terminationcondition import TimedRun, CountRun
 from domain import Domain
+import csv
 
 import sys
 import argparse
@@ -39,11 +40,31 @@ def create_parser():
     parser.add_argument("--dryrun", help="If set, kafka messages won't be sent", action='store_true')
     parser.add_argument("--template", help="Template JSON file", default=None, type=str)
     parser.add_argument("--domain", help="Domain JSON file", default="domain.json")
+    parser.add_argument("--csv", help="Output in CSV format", default=False, type=str)
     return parser
 
 def usage(parser):
     parser.print_help()
     sys.exit(1)
+
+def generate_csv(constructor, termination_condition, args):
+    count = 0
+    with open(args.csv, mode='w') as filehandle:
+        first_for_schema = constructor()
+        fieldnames = first_for_schema.keys()
+        print("Fieldnames %s" % fieldnames)
+        writer = csv.DictWriter(filehandle, fieldnames=fieldnames)
+        writer.writeheader()
+
+        while True:
+            count = count + 1
+            thing = constructor()
+            writer.writerow(thing.as_dict())
+            termination_condition.ran(thing)
+            if termination_condition.finished():
+                break
+    
+    return count   
 
 def generate(constructor, termination_condition, args):
     count = 0
@@ -139,7 +160,10 @@ def main():
 
     domain = Domain(args.domain)
     try:
-        generate(constructor, tc, args)
+        if args.csv:
+            generate_csv(constructor, tc, args)
+        else: 
+            generate(constructor, tc, args)
     except KeyboardInterrupt:
         finish_and_exit(tc, "\n\nInterrupted.  Exiting", 1)
 
