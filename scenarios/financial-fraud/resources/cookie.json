@@ -1,5 +1,7 @@
 {
-    "party_id": "customer_id",
+    "id": "counter",
+    "party_id": "party_id",
     "cookie_id": "uuid",
+    "ip": "ipv4_public",
     "cookie": "sha256"
 }

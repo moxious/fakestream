@@ -1,18 +1,9 @@
 {
-    "id": "account_id",
+    "id": "uuid",
     "type": "credit_card",
     "full": "credit_card_number",
     "provider": "credit_card_provider",
     "expiration_date": "credit_card_expire",
-    "account_holder": {
-        "id": "customer_id",
-        "gender": "M",
-        "first_name": "first_name_male",
-        "last_name": "last_name",
-        "state": "state_abbr",
-        "address": "street_address",
-        "zip": "zipcode",
-        "occupation": "job"
-    },
+    "party_id": "party_id",
     "currency": "USD"
 }

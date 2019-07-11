@@ -18,6 +18,7 @@ class Domain:
     ACCOUNTS = 3000
     TRANSFERS = 1000000
     PURCHASES = 1000000
+    PARTIES = 100000
     currencies = ['USD', 'USD', 'USD', 'USD', 'EUR', 'EUR', 'EUR', 'GBP', 'GBP', 'CHF', 'AUD', 'CNY', 'RUB']
 
     @staticmethod
@@ -43,6 +44,7 @@ class Domain:
         return json.dumps(self.spec, indent=3)
 
 class FakeStreamProvider(BaseProvider):
+    c = 0
     """
     A Provider for web-related test data.
     >>> from faker import Faker
@@ -51,6 +53,11 @@ class FakeStreamProvider(BaseProvider):
     >>> fake.add_provider(FakeStreamProvider)
     """
     fake = Faker()
+    def counter(self): 
+        FakeStreamProvider.c = FakeStreamProvider.c + 1
+        return FakeStreamProvider.c
+
+    def party_id(self): return Domain.id(Domain.PARTIES)
     def bank_id(self): return Domain.id(Domain.BANKS)
     def account_id(self): return Domain.id(Domain.ACCOUNTS)
     def customer_id(self): return Domain.id(Domain.CUSTOMERS)

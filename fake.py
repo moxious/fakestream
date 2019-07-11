@@ -56,13 +56,10 @@ def generate_csv(constructor, termination_condition, args):
         writer = csv.DictWriter(filehandle, fieldnames=fieldnames)
         writer.writeheader()
 
-        while True:
+        while count < args.n:
+            writer.writerow(constructor().as_dict())
+            print(count)
             count = count + 1
-            thing = constructor()
-            writer.writerow(thing.as_dict())
-            termination_condition.ran(thing)
-            if termination_condition.finished():
-                break
     
     return count   
 

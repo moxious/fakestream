@@ -1,6 +1,6 @@
 {
-    "id": "customer_id",
-    "first_name": "first_name_male",
+    "id": "party_id",
+    "first_name": "first_name",
     "last_name": "last_name",
     "state": "state_abbr",
     "city": "city",
