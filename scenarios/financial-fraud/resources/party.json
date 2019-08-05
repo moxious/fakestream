@@ -7,6 +7,6 @@
     "ssn": "ssn",
     "address": "street_address",
     "zip": "zipcode",
-    "phone": "phone",
+    "phone": "phone_number",
     "occupation": "job"
 }
