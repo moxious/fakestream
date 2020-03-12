@@ -78,7 +78,7 @@ def generate(constructor, termination_condition, args):
     while True:
         count = count + 1
         thing = constructor()
-        # print(thing)
+        print(thing)
 
         if not dry_run:
             kafka_send(topic, thing)
@@ -125,7 +125,11 @@ def get_constructor(args, parser):
 def stats(tc):
     elapsed = tc.elapsed()
     count = tc.get_count()
-    ms_per_msg = elapsed / count
+
+    if count > 0:
+        ms_per_msg = elapsed / count
+    else: ms_per_msg = 0
+    
     msg_per_sec = count / (elapsed / 1000)
     print("Production stats:")
     print("   %d messages in" % count)
