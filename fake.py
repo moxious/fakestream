@@ -16,7 +16,7 @@ import argparse
 import time
 import json
 
-from kafka import kafka_send, kafka_flush
+from kafka import kafka_send, kafka_flush, kafka_producer
 
 types = {
     "bank": Bank,
@@ -41,6 +41,7 @@ def create_parser():
     parser.add_argument("--template", help="Template JSON file", default=None, type=str)
     parser.add_argument("--domain", help="Domain JSON file", default="domain.json")
     parser.add_argument("--csv", help="Output in CSV format", default=False, type=str)
+    parser.add_argument("--firehose", help="If set, go as fast as possible, no rate limiting", default=False, type=str)
     return parser
 
 def usage(parser):
@@ -77,16 +78,21 @@ def generate(constructor, termination_condition, args):
     while True:
         count = count + 1
         thing = constructor()
-        print(thing)
+        # print(thing)
 
         if not dry_run:
             kafka_send(topic, thing)
+
+        if count % 1000 == 0:
+            print("%d sent" % count)
+            kafka_producer().poll(0)
 
         termination_condition.ran(thing)
         if termination_condition.finished(): 
             break
         
-        time.sleep(sleep_time_sec)
+        if not args.firehose:
+            time.sleep(sleep_time_sec)
 
     if not dry_run:
         print("Flushing kafka...")

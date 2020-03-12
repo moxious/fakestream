@@ -18,8 +18,8 @@ def acked(err, msg):
     """Delivery report callback called (from flush()) on successful or failed delivery of the message."""
     if err is not None:
         print("failed to deliver message: {}".format(err.str()))
-    else:
-        print("topic {} => [part:{}] @ offset:{}".format(msg.topic(), msg.partition(), msg.offset()))
+    #else:
+    #    print("topic {} => [part:{}] @ offset:{}".format(msg.topic(), msg.partition(), msg.offset()))
 
 confluent_cloud = 'pkc-epgnk.us-central1.gcp.confluent.cloud:9092'
 
@@ -49,10 +49,13 @@ p = Producer(config)
 def kafka_flush():
     return p.flush()
 
+def kafka_producer():
+    return p
+
 def kafka_send(topic, entry, callback=acked):
     if not topic or not entry:
         raise Exception('Topic and entry must be good')
 
     r = p.produce(topic=topic, value=str(entry).encode('utf-8'), callback=callback)
-    p.poll(0)
+    # p.poll(0)
     return r
