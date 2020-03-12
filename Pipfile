@@ -11,6 +11,7 @@ rope = "*"
 faker = "*"
 confluent-kafka = {extras = ["avro"],version = "*"}
 numpy = "*"
+neo4j = "*"
 
 [requires]
 python_version = "3.7"
